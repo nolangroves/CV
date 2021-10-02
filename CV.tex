@@ -6,14 +6,42 @@
 \usepackage[utf8]{inputenc}
 \usepackage{multicol}
 
+% Define \cvdoublecolumn, which sets its arguments in two columns without any labels
+
+\newcommand{\cvdoublecolumn}[2]{%
+  \cvitem[0.75em]{}{%
+    \begin{minipage}[t]{0.4\textwidth}#1\end{minipage}%
+    \hfill%
+    \begin{minipage}[t]{0.4\textwidth}#2\end{minipage}%
+    }%
+}
+
+% usage: \cvreference{name}{address line 1}{address line 2}{address line 3}{address line 4}{e-mail address}{phone number}
+% Everything but the name is optional
+% If \addresssymbol, \emailsymbol or \phonesymbol are specified, they will be used.
+% (Per default, \addresssymbol isn't specified, the other two are specified.)
+% If you don't like the symbols, remove them from the following code, including the tilde ~ (space).
+
+\newcommand{\cvreference}[7]{%
+    \textbf{#1}\newline% Name
+    \ifthenelse{\equal{#2}{}}{}{\addresssymbol~#2\newline}%
+    \ifthenelse{\equal{#3}{}}{}{#3\newline}%
+    \ifthenelse{\equal{#4}{}}{}{#4\newline}%
+    \ifthenelse{\equal{#5}{}}{}{#5\newline}%
+    \ifthenelse{\equal{#6}{}}{}{\emailsymbol~\texttt{#6}\newline}%
+    \ifthenelse{\equal{#7}{}}{}{\phonesymbol~#7}}
+
+
+
 \name{Nolan}{Groves}
 \email{nbg15@txstate.edu}
 \phone[mobile]{(512)~568~2649}
 %\photo[64pt][0.4pt]{picture}
-\quote{College graduate with lab work, programming, research, and teaching experience. 
-Looking to specialize in autonomous systems. 
-Extensive experience in a ultra-high vacuum research lab with both hardware and software.  
-Participated in undergraduate research projects including a project applying machine learning to spectral data. Broad exposure to physics, applied electronics, multiple programming languages, and advanced math. }
+\quote{Skilled programmer with a strong foundation built from physics, electronics, and research experience.
+Looking to create autonomous systems as the next generation of robotics. 
+Extensive experience with demanding semiconductor hardware and software, requiring both mental flexibility and close attention to detail. 
+Achievements include analysis of fluorescence spectroscopy using machine learning for medical diagnostics. 
+Broad exposure to applied physics, hand-on electronics design, multiple programming languages, and advanced math. }
 
 \begin{document}
 \makecvtitle
@@ -21,32 +49,32 @@ Participated in undergraduate research projects including a project applying mac
 \section{Education}
 	\cventry{2017 -- 2021}{Bachelors degree in Physics with CS minor}{Texas State University}{San Marcos, TX}{3.97 GPA}{Graduated \emph{Summa Cum Laude}, Dean's list every semester}
 	\subsection{Notable Coursework}
-	\cvlistitem{\emph{Advanced Lab} - Worked in self-guided groups to design and create practical projects, including an automated high-vacuum chamber and a small quadcopter capable of limited autonomous flight. Through thsese projects we learned how to integrate hardware and software components with Arduino and Labview, as well as the basics of PID systems and control loops.}
-	\cvlistitem{\emph{Applied Electronics} - Learned the fundamentals of designing and understanding circuits, then applied those to design and create an independent project. My project was a simple coil-gun using a capacitor bank and solenoid to accelerate a projectile, and capable of charging to 1000 volts. Aside from an understanding of circuit design, I also gained experience in soldering, component choice, and working with high voltage.}
+	\cvlistitem{\emph{Advanced Lab} - Self-guided group projects with a focus on practical electronics. Projects included an automated high-vacuum chamber and a drone capable of limited autonomous flight. Learned to integrate hardware and software components with Arduino and Labview, as well as the basics of PID systems and control loops.}
+	\cvlistitem{\emph{Applied Electronics} - Basic circuit design and analysis with a hands-on focus. I designed and built a 1000V coil-gun to accelerate a load. Practical experience also included soldering, component selection, and high voltage safety. }
 	\cvlistitem{\emph{Other Notable Courses} - Electromagnetic Theory I \& II, Calculus III, Quantum Mechanics, Statistical Physics, Differential Equations, Assembly Language, Data Structures \& Algorithms}
 	
 	\cventry{2012 -- 2016}{IB Diploma}{Westwood High School}{Austin, TX}{4.0 GPA}{}
 
 \section{Research Experience}
-\cventry{May 2019 -- May 2021}{Lab Tech}{Texas State University}{San Marcos, TX}{}{Worked under Dr. Mark Wistey in Molecular Beam Epitaxy (MBE) research. Resolved technical/mechanical issues and assisted with general ultra-high vacuum lab operation. Also worked alongside him doing guided research using machine learning to analyze spectra.
+\cventry{May 2019 -- May 2021}{Lab Tech}{Texas State University}{San Marcos, TX}{}{Worked under Dr. Mark Wistey in Molecular Beam Epitaxy (MBE) research. Found robust, creative solutions to multiple challenges in hardware and software in ultra-high vacuum equipment. 
 \begin{itemize}
-	\item Modified code to allow digital reading of unsupported sensors through Molly control software, as well as debugging and implementing various other hardware control interfaces.
+	\item Reverse engineered legacy code to add new sensors and controls, and debugged and implemented multiple instrumentation and control interfaces.
     \item Helped design and build water chiller units with digital controls.
-    \item Oversaw transfer of control systems to new hardware and operating systems.
-    \item Preformed general maintenance work and operation on ultra-clean systems, ultra-high vacuum systems, high voltage systems, arsenic contaminated systems, and others. 
+    \item Upgraded to new hardware control systems.
+    \item Assisted with intricate repairs and upgrades to \$1M ultra-high vacuum equipment under strict contamination requirements.
 \end{itemize}}
-\cventry{Fall 2021}{Undergraduate Research - Machine Learning}{Texas State University}{San Marcos, TX}{}{Worked as part of a project to identify irregularities in goat blood via spectrography. Implemented a neural network using TensorFlow to categorize the spectral data. The nature of the collected data resulted in machine learning being a poor fit for the processing method, and further research is ongoing}
-\cventry{Spring 2020}{Undergraduate Research - FTIR}{Texas State University}{San Marcos, TX}{}{Worked under an advisor to analyze the feasibility of utilizing Fourier Transform Infared Spectroscopy (FTIR) to produce a on-chip component capable of spectorgraphy. While the required materials-science foundataion could not be found to utlize FTIR, a promising technique with a supercapacitor could be an alternative. }
+\cventry{Fall 2021}{Undergraduate Research - Machine Learning}{Texas State University}{San Marcos, TX}{}{Worked as part of a project to identify irregularities in goat blood via spectrography. Implemented a neural network using TensorFlow to categorize the spectral data. The nature of the collected data resulted in machine learning being a poor fit for the processing method, and further research is ongoing.	}
+\cventry{Spring 2020}{Undergraduate Research - FTIR}{Texas State University}{San Marcos, TX}{}{Analyzed the feasibility of utilizing Fourier Transform Infrared Spectroscopy (FTIR) to produce a compact, single chip replacement for a tabletop optical spectrometer. While the required materials-science foundation could not be found to utilize FTIR, a technique utilizing a graphene based super-capacitor was found as a possible alternative.}
 
 \pagebreak
 \section{Teaching Experience}
-\cventry{Sep 2021 -- Current}{Instructor}{Mathnasium}{Austin, TX}{}{Help students K-12 struggling with math in a tailored curriculum course, as well as one on one instruction}
-\cventry{Aug 2021 -- Current}{Online Tutor}{Tutor.com}{}{}{Work with students in science, math, and programing with any probelems on an ad-hoc basis. Highly rated by my students}
-\cventry{Aug 2019 -- May 2021}{Learning Assistant/Lab Instructor}{Texas State University}{San Marcos, TX}{}{Worked with various teachers to teach the intro Electricity and Magnetism course and the Advanced Lab course
+\cventry{Sep 2021 -- Current}{Instructor}{Mathnasium}{Austin, TX}{}{Help K-12 math students in a tailored curriculum course and one-on-one tutoring.}
+\cventry{Aug 2021 -- Current}{Online Tutor}{Tutor.com}{}{}{Work with students in science, math, and programming with any problems on an ad-hoc basis. Rated 5 stars by students I've helped.}
+\cventry{Aug 2019 -- May 2021}{Learning Assistant/Lab Instructor}{Texas State University}{San Marcos, TX}{}{Helped teach the intro Electricity \& Magnetism and Advanced Lab courses.
 \begin{itemize}
-    \item Taught the fundamentals of electronic and mechanical systems using independent projects including a high-vacuum system and an automated weather station
-    \item Learned the pedagogical models backing the Learning Assistant program and modern learning in general
-    \item Staffed the physics help center to assist with a variety of problems from various classes.
+    \item Taught the fundamentals of electronic and mechanical systems through independent projects including automated high-vacuum systems and weather stations. Students utilized Arduino micro-controllers to read multiple sensors, analyze the data, and control outputs appropriately.
+    \item Studied the pedagogical models behind learning, and learned how to work with students to best fit their personal mental model of understanding.
+    \item Assisted students with a wide variety of problems across many courses and levels in the physics Help Center.
 \end{itemize}}
 
 
@@ -63,16 +91,30 @@ Participated in undergraduate research projects including a project applying mac
     \cvlistdoubleitem{Wood Shop}    {Laser Cutter}
     
 \section{References}
-\begin{cvcolumns}
-    \cvcolumn{}{\begin{itemize}
-        \item \emph{Dr. Mark Wistey}, Associate Professor -- Physics, Texas State University\newline P.I. / Advisor\newline (512) 245-2916 \newline m\_w359@txstate.edu
-        %\item Person 2
-    \end{itemize}}
-    \cvcolumn{}{\begin{itemize}
-        \item \emph{Dr. Brandon Lunk}, Lecturer -- Physics, Texas State University\newline(512) 245-2131\newline b\_l150@txstate.edu
-    \end{itemize}}
-\end{cvcolumns}
-
+\cvdoublecolumn{
+    \cvreference{Dr. Mark Wistey}
+    {Associate Professor -- Physics}
+    {Texas State University}
+    {P.I. / Advisor}
+    {}
+    {m\_w359@txstate.edu}
+    {(512) 245-2916}\\[1em]
+    \cvreference{Nathan England}
+    {Research Associate}
+    {Texas State University}
+    {Lab Supervisor}
+    {}
+    {}
+    {(480) 516-8657}
+}{   
+    \cvreference{Dr. Brandon Lunk}
+    {Lecturer -- Physics}
+    {Texas State University}
+    {}
+    {}
+    {b\_l150@txstate.edu}
+    {(512) 245-2131}
+}
 %\section{General Skills}
 	%\cvlistdoubleitem{Problem Solver}			{Strong Mediator}
 	%\cvlistdoubleitem{Fast Learner}				{Excellent Teacher/Explainer}
